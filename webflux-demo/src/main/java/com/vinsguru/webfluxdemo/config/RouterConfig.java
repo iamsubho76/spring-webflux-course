@@ -26,7 +26,7 @@ public class RouterConfig {
    // @Bean
     private RouterFunction<ServerResponse> serverResponseRouterFunction(){
         return RouterFunctions.route()
-                .GET("square/{input}", RequestPredicates.path("*/1?"), requestHandler::squareHandler)
+                .GET("square/{input}", RequestPredicates.path("*/1?").or(RequestPredicates.path("*/20?")), requestHandler::squareHandler)
                 .GET("square/{input}", req -> ServerResponse.badRequest().bodyValue("only 10-19 allowed"))
                 .GET("table/{input}", requestHandler::tableHandler)
                 .GET("table/{input}/stream", requestHandler::tableStreamHandler)

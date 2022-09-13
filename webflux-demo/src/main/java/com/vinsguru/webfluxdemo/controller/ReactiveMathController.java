@@ -5,6 +5,7 @@ import com.vinsguru.webfluxdemo.dto.Response;
 import com.vinsguru.webfluxdemo.service.ReactiveMathService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.codec.json.AbstractJackson2Encoder;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -24,6 +25,8 @@ public class ReactiveMathController {
                         .defaultIfEmpty(new Response(-1));
     }
 
+    //In the both the below cases  if the browser will left processing in the middle then reactive nature will stop processing
+    // that is becoming possible because of AbstractJackson2Encoder class
     @GetMapping("table/{input}")
     public Flux<Response> multiplicationTable(@PathVariable int input){
         return this.mathService.multiplicationTable(input);

@@ -25,9 +25,13 @@ public class ReactiveMathValidationController {
         return this.mathService.findSquare(input);
     }
 
+    //If you want to do the validation pert of the pipeline
     @GetMapping("square/{input}/mono-error")
     public Mono<Response> monoError(@PathVariable int input){
-        return Mono.just(input)
+        return Mono
+                //creating reactive pipeline using just
+                .just(input)
+                //handle we use for filter and map
                     .handle((integer, sink) -> {
                         if(integer >= 10 && integer <= 20)
                             sink.next(integer);

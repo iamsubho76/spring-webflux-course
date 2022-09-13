@@ -18,8 +18,12 @@ public class Lec01GetSingleResponseTest extends BaseTest {
         Response response = this.webClient
                 .get()
                 .uri("reactive-math/square/{number}", 5)
+                //if you want to send the header
+//                .headers()
+                // by using retrieve you will actually send req and get the resp
                 .retrieve()
                 .bodyToMono(Response.class) // Mono<Response>
+                //using block means I ll wait until I ll get response
                 .block();
 
         System.out.println(

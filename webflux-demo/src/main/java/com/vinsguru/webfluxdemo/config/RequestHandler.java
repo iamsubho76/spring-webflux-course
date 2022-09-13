@@ -22,6 +22,7 @@ public class RequestHandler {
     public Mono<ServerResponse> squareHandler(ServerRequest serverRequest){
         int input = Integer.parseInt(serverRequest.pathVariable("input"));
         Mono<Response> responseMono = this.mathService.findSquare(input);
+        //bodyValue is nor publisher type, souse body method
         return ServerResponse.ok().body(responseMono, Response.class);
     }
 
